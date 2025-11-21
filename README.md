@@ -29,7 +29,7 @@ pip install sherpa-onnx sherpa-onnx-bin
 Create SQLite views to represent your wakeword dataset, open `words.db` with SQLite Browser create your own and just export as a .CSV table.  
 `create-word-lists.py` will create the number required likely the largest view and split the list to 3 TTS so you maximise prosody and variation. `create-word-lists.py` will create a apportioned piper list based on total voices   
 Say for piper onnx clone the repo, do the `pip install` and then run `piper-word-list.py` after downloading the model as described in https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html#vits-piper-en-us-libritts-r-medium-english-904-speakers  
-I am not sure why this seems to provide better quality with more variation than the models the actual piper repo's provide and prob does exist in piper also somewhere...  
+I am not sure why this seems to provide better quality with more variation than the models the actual piper repo's provide and prob does exist in the piper repo's somewhere...  
 
 Coqui is just a `pip install`, as the module on 1st use will grab the correct model it uses the voice clone function with voices downloaded from https://accent.gmu.edu/howto.php  
 To save time you can use this download of over 1000 male/female voices from accent.gmu.edu https://drive.google.com/file/d/1gPiz--326JJSO_1CspNt97VPW1G95jlW/view?usp=drive_link  
