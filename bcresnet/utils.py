@@ -140,7 +140,7 @@ class Preprocess:
             n_fft=n_fft,
             n_mels=n_mels,
         )
-        self.sample_len = sample_rate
+        self.sample_len = 24000
         self.specaug = specaug
         self.device = device
         if self.specaug:
