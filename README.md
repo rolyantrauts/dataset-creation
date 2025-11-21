@@ -12,3 +12,16 @@ https://github.com/Qualcomm-AI-research/bcresnet
  Example dataset here 
 
 https://drive.google.com/file/d/1Uhe4Xjtas-ytIZgtGEXfK5qDo8CFcfXw/view?usp=sharing
+
+# Install TTS from
+https://github.com/idiap/coqui-ai-TTS
+```
+pip install coqui-tts[languages]
+```
+https://github.com/netease-youdao/EmotiVoice
+
+[sherpa onnx
+](https://github.com/k2-fsa/sherpa-onnx)
+```
+pip install sherpa-onnx sherpa-onnx-bin
+```
