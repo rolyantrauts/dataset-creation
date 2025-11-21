@@ -7,3 +7,8 @@ conda install pytorch torchvision torchaudio -c pytorch
 conda install tqdm requests
 pip install soundfile
 ```
+
+### Train
+```
+python main.py --tau 2
+```
