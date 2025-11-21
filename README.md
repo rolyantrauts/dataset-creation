@@ -31,12 +31,12 @@ create-word-lists.py will create the number required likely the largest view and
 Say for piper onnx clone the repo, do the pip install and then run piper-word-list.py after downloading the model as described in https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html#vits-piper-en-us-libritts-r-medium-english-904-speakers  
 I am not sure why this seems to provide better quality with more variation than the models the actual piper repo's provide and prob does exist in piper also somewhere...  
 
-Coqui is just a pip install as teh module on 1st use will grab the correct model it uses the voice clone function with voices downloaded from https://accent.gmu.edu/howto.php  
+Coqui is just a `pip install`, as the module on 1st use will grab the correct model it uses the voice clone function with voices downloaded from https://accent.gmu.edu/howto.php  
 To save time you can use this download of over 1000 male/female voices from accent.gmu.edu https://drive.google.com/file/d/1gPiz--326JJSO_1CspNt97VPW1G95jlW/view?usp=drive_link  
-coqui-list.py on the coqui.list will create TTS output...  
+`coqui-list.py` on the coqui.list will create TTS output...  
 
 Emotivoice you can just use the inbuilt tools of convert emot list to phonetics as directed in the readme https://github.com/netease-youdao/EmotiVoice/blob/main/README.md  
-`python frontend.py word-list.txt > data/my_text.txt` to create 'phone.txt' and then  emot-word-list.py will add voices to that list.  
+`python frontend.py word-list.txt > data/my_text.txt` to create 'phone.txt' and then `emot-word-list.py` will add voices to that list.  
 ```
 TEXT=data/my_text_for_tts.txt
 python inference_am_vocoder_joint.py \
