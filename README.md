@@ -26,17 +26,17 @@ https://github.com/netease-youdao/EmotiVoice
 pip install sherpa-onnx sherpa-onnx-bin
 ```
 
-Create SQLite views to represent your wakeword dataset, open `words.db` with SQLite Browser create your own and just export as a .CSV table.
-create-word-lists.py will create the number required likely the largest view and split the list to 3 TTS so you maximise prosody and variation. create-word-lists.py will create a apportioned piper list based on total voices 
-Say for piper onnx clone the repo, do the pip install and then run piper-word-list.py after downloading the model as described in https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html#vits-piper-en-us-libritts-r-medium-english-904-speakers
-I am not sure why this seems to provide better quality with more variation than the models the actual piper repo's provide and prob does exist in piper also somewhere...
+Create SQLite views to represent your wakeword dataset, open `words.db` with SQLite Browser create your own and just export as a .CSV table.  
+create-word-lists.py will create the number required likely the largest view and split the list to 3 TTS so you maximise prosody and variation. create-word-lists.py will create a apportioned piper list based on total voices   
+Say for piper onnx clone the repo, do the pip install and then run piper-word-list.py after downloading the model as described in https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html#vits-piper-en-us-libritts-r-medium-english-904-speakers  
+I am not sure why this seems to provide better quality with more variation than the models the actual piper repo's provide and prob does exist in piper also somewhere...  
 
-Coqui is just a pip install as teh module on 1st use will grab the correct model it uses the voice clone function with voices downloaded from https://accent.gmu.edu/howto.php
-To save time you can use this download of over 1000 male/female voices from accent.gmu.edu https://drive.google.com/file/d/1gPiz--326JJSO_1CspNt97VPW1G95jlW/view?usp=drive_link
-coqui-list.py on the coqui.list will create TTS output...
+Coqui is just a pip install as teh module on 1st use will grab the correct model it uses the voice clone function with voices downloaded from https://accent.gmu.edu/howto.php  
+To save time you can use this download of over 1000 male/female voices from accent.gmu.edu https://drive.google.com/file/d/1gPiz--326JJSO_1CspNt97VPW1G95jlW/view?usp=drive_link  
+coqui-list.py on the coqui.list will create TTS output...  
 
-Emotivoice you can just use the inbuilt tools of convert emot list to phonetics as directed in the readme https://github.com/netease-youdao/EmotiVoice/blob/main/README.md
-`python frontend.py word-list.txt > data/my_text.txt` to create 'phone.txt' and then  emot-word-list.py will add voices to that list.`
+Emotivoice you can just use the inbuilt tools of convert emot list to phonetics as directed in the readme https://github.com/netease-youdao/EmotiVoice/blob/main/README.md  
+`python frontend.py word-list.txt > data/my_text.txt` to create 'phone.txt' and then  emot-word-list.py will add voices to that list.`  
 ```
 TEXT=data/my_text_for_tts.txt
 python inference_am_vocoder_joint.py \
@@ -45,3 +45,21 @@ python inference_am_vocoder_joint.py \
 --checkpoint g_00140000 \
 --test_file $TEXT
 ```
+
+After TTS creation use trim.py to remove silence as reject too long /halucinations.  
+Hey example  
+```
+start_length=0.45
+end_length=0.8
+min_pass_len=0.2
+silence_percentage=0.05
+tries=6
+increment=2
+min_silence_duration=0.1
+fade_len=0.05
+```
+
+If you want to create a noise class a curated list of 10sec noise files can be downloaded from here https://drive.google.com/file/d/1tY6qkLSTz3cdOnYRuBxwIM5vj-w4yTuH/view?usp=sharing
+
+Something somewhere is not right as likely you will find after training and testing your own model its far more accurate than ones supplied.
+Dataset and basic instructions have been supplied as a toy dataset with no augmentation purely as a test datum. 
