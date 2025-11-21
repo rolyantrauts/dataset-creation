@@ -36,7 +36,7 @@ To save time you can use this download of over 1000 male/female voices from acce
 coqui-list.py on the coqui.list will create TTS output...  
 
 Emotivoice you can just use the inbuilt tools of convert emot list to phonetics as directed in the readme https://github.com/netease-youdao/EmotiVoice/blob/main/README.md  
-`python frontend.py word-list.txt > data/my_text.txt` to create 'phone.txt' and then  emot-word-list.py will add voices to that list.`  
+`python frontend.py word-list.txt > data/my_text.txt` to create 'phone.txt' and then  emot-word-list.py will add voices to that list.  
 ```
 TEXT=data/my_text_for_tts.txt
 python inference_am_vocoder_joint.py \
