@@ -46,7 +46,7 @@ python inference_am_vocoder_joint.py \
 --test_file $TEXT
 ```
 
-After TTS creation use trim.py to remove silence as reject too long /halucinations.  
+After TTS creation use trim.py to remove silence as reject too long/halucinations.  
 Hey example  
 ```
 start_length=0.45
