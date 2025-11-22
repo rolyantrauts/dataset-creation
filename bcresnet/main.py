@@ -47,17 +47,34 @@ class Trainer:
         Trains the model and presents the train/test progress.
         """
         # train hyperparameters
-        total_epoch = 300
+        total_epoch = 200
         warmup_epoch = 5
         init_lr = 5e-4
         lr_lower_limit = 0
-
+        
+        # --- Start of new model saving functionality ---
+        # Construct the dynamic filename using an f-string
+        model_filename = f"bcresnet-tau-{self.tau}.pth"
+    
+        # Define the directory where the model will be saved.
+        # It is a robust engineering practice to ensure the target directory exists.
+        save_dir = "saved_models"
+        os.makedirs(save_dir, exist_ok=True) # Create directory if it doesn't exist
+        # Combine the directory and filename to form the complete path
+        model_path = os.path.join(save_dir, model_filename)
+        best_acc = 0.0
+        
         # optimizer
         optimizer = torch.optim.SGD(self.model.parameters(), lr=0, weight_decay=1e-3, momentum=0.9)
         n_step_warmup = len(self.train_loader) * warmup_epoch
         total_iter = len(self.train_loader) * total_epoch
         iterations = 0
-
+        
+        total_params = sum(p.numel() for p in self.model.parameters())
+        print(f"Number of parameters: {total_params}")
+        total_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        print(f"Number of trainable parameters: {total_params}")
+        
         # train
         for epoch in range(total_epoch):
             self.model.train()
@@ -91,28 +108,15 @@ class Trainer:
             with torch.no_grad():
                 self.model.eval()
                 valid_acc = self.Test(self.valid_dataset, self.valid_loader, augment=False)
-                print("valid acc: %.4f" % (valid_acc))
+                if valid_acc > best_acc and epoch + 1 > warmup_epoch:
+                  best_acc = valid_acc
+                  torch.save(self.model.state_dict(), model_path)
+                  print(f'Saved new best model with validation accuracy: {valid_acc:.2f}%')
+                else:    
+                  print("valid acc: %.4f" % (valid_acc))
 
         test_acc = self.Test(self.test_dataset, self.test_loader, augment=False)  # official testset
         print("test acc: %.3f" % (test_acc))
-        # --- Start of new model saving functionality ---
-        # Construct the dynamic filename using an f-string
-        model_filename = f"bcresnet-tau-{self.tau}.pth"
-    
-        # Define the directory where the model will be saved.
-        # It is a robust engineering practice to ensure the target directory exists.
-        save_dir = "saved_models"
-        os.makedirs(save_dir, exist_ok=True) # Create directory if it doesn't exist
-
-        # Combine the directory and filename to form the complete path
-        PATH = os.path.join(save_dir, model_filename)
-
-        # Save the model's state_dict, which contains the learned parameters
-        torch.save(self.model.state_dict(), PATH)
-        print(f"Model saved successfully to: {PATH}")
-        # --- End of new model saving functionality ---
-        print("End.")
-
 
     def Test(self, dataset, loader, augment):
         """
