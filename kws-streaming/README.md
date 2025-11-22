@@ -63,5 +63,5 @@ crnn \
 --act1 "'linear','relu'" \
 --stateful 1
 ```
-`nano crnn_state` paste the above with class label modifications  
+`nano crnn_state` paste the above with class label modifications and add a empty folder `_background_noise_` to data2
 `source crnn_state`
