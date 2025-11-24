@@ -12,3 +12,4 @@ pip install soundfile
 ```
 python main.py --tau 2
 ```
+example pth in archive.zip
